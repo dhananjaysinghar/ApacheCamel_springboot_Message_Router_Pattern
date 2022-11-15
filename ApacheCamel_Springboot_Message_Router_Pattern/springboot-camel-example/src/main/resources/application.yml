@@ -1,3 +1,11 @@
+BOOTSTRAP_SERVER: 192.168.29.247:9092
+KAFKA_MAX_POLL_RECORD: 1000
+KAFKA_CONSUMER_GROUP_ID: booking-consumer-test
+KAFKA_SERVICE_TOPIC_NAME: booking_core_service_topic
+KAFKA_STATE_MACHINE_TOPIC_NAME: state_machine_topic
+KAFKA_CAMEL_TOPIC_NAME: apache_camel
+
+
 camel:
   springboot:
     main-run-controller: true
@@ -5,7 +13,8 @@ camel:
 server:
   port: 9090
 
+
 app:
-  camel-from: 'kafka:apache_camel?brokers=192.168.29.247:9092&maxPollRecords=1000&groupId=booking-consumer-test'
-  camel-to-core-service: 'kafka:booking_core_service_topic?brokers=192.168.29.247:9092'
-  camel-to-state-machine: 'kafka:state_machine_topic?brokers=192.168.29.247:9092'
+  camel-from: 'kafka:${KAFKA_CAMEL_TOPIC_NAME}?brokers=${BOOTSTRAP_SERVER}&maxPollRecords=${KAFKA_MAX_POLL_RECORD}&groupId=${KAFKA_CONSUMER_GROUP_ID}'
+  camel-to-core-service: 'kafka:${KAFKA_SERVICE_TOPIC_NAME}?brokers=${BOOTSTRAP_SERVER}'
+  camel-to-state-machine: 'kafka:${KAFKA_STATE_MACHINE_TOPIC_NAME}?brokers=${BOOTSTRAP_SERVER}'
