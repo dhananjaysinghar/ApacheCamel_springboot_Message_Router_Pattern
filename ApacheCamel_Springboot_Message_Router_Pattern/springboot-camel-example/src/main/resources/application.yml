@@ -1,0 +1,11 @@
+camel:
+  springboot:
+    main-run-controller: true
+
+server:
+  port: 9090
+
+app:
+  camel-from: 'kafka:apache_camel?brokers=192.168.29.247:9092&maxPollRecords=1000&groupId=booking-consumer-test'
+  camel-to-core-service: 'kafka:booking_core_service_topic?brokers=192.168.29.247:9092'
+  camel-to-state-machine: 'kafka:state_machine_topic?brokers=192.168.29.247:9092'

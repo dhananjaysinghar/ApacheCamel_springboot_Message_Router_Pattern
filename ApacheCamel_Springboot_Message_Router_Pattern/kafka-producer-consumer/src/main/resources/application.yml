@@ -1,0 +1,13 @@
+app:
+  kafka:
+    enabled: true
+    host: ${kafka_bootstrap_servers:192.168.29.247:9092}
+    capture-topic: capture_topic
+    camel-topic: apache_camel
+    booking-core-service-topic: booking_core_service_topic
+    state-machine-topic: state_machine_topic
+    max-poll-record: 1000
+    consumer-group-id: booking-consumer-test
+
+server:
+  port: 8080
